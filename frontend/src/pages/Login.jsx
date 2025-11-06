@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { login } from '../auth/auth'
+import { login } from '../../auth/auth.js'
 import '../styles/login.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
