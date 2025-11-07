@@ -19,7 +19,7 @@ export default function ProtectedRoute({ children }){
       }
 
       try {
-        await client.get('/profile/' ) 
+        await client.get('profile/' ) 
         setIsAuth(true)
       } catch{
         clearTokens()

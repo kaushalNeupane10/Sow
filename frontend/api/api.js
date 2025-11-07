@@ -51,7 +51,7 @@ client.interceptors.response.use(
       isRefreshing = true
 
       try {
-        const resp = await axios.post(`${backendApi}/api/token/refresh/`, { refresh: refreshToken })
+        const resp = await axios.post(`${backendApi}/token/refresh/`, { refresh: refreshToken })
         const newAccess = resp.data.access
         setTokens({ access: newAccess, refresh: refreshToken }) 
         client.defaults.headers.common['Authorization'] = 'Bearer ' + newAccess

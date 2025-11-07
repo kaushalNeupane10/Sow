@@ -25,7 +25,7 @@ export function isAuthenticated(){
 }
 
 export async function login(email, password) {
-  const res= await client.post('/api/token/', {email, password })
+  const res= await client.post('token/', {email, password })
   const { access, refresh } = res.data
   setTokens({ access, refresh })
   return res.data
@@ -33,11 +33,16 @@ export async function login(email, password) {
 }
 
 export async function register(username, email, password) {
-  const res = await client.post('/api/register/', {username, email, password})
+  const res = await client.post('register/', {username, email, password})
   return res.data
 }
 
 export async function logout() {
   clearTokens()
   
+}
+
+export async function getProfile(){
+  const res= await client.get('profile/') 
+  return res.data
 }
