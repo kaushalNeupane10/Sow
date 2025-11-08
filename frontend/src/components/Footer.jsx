@@ -1,6 +1,8 @@
 import "../styles/footer.css";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const {t} = useTranslation();
   return (
     <footer className="footer">
       <div className="footer-top">
@@ -8,9 +10,9 @@ const Footer = () => {
           123Fakturera
         </div>
         <div className="footer-right">
-          <a href="/">Home</a>
-          <a href="/order">Order</a>
-          <a href="/contact">Contact Us</a>
+          <a href="/">{t("Home")}</a>
+          <a href="/order">{t("Order")}</a>
+          <a href="/contact">{t("Contact Us")}</a>
         </div>
       </div>
       <hr className="footer-line" />

@@ -5,6 +5,7 @@ import DashboardNavbar from "../components/DashboardNavbar";
 import ProductForm from "../components/ProductForm";
 import "../styles/dashboard.css";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () =>{
   const [isSidebarOpen, setIsSidebarOpen]= useState(false);
@@ -74,7 +75,8 @@ const Dashboard = () =>{
     setEditingProduct(product);
     setShowForm(true);
   };
-
+  
+  const {t} = useTranslation();
   return (
     <div className="dashboard-container">
       <DashboardNavbar toggleSidebar={toggleSidebar} />
@@ -83,15 +85,15 @@ const Dashboard = () =>{
         <main className="dashboard-main">
           <div className="search-actions">
             <div className="search-bar">
-              <input type="text" placeholder="Search Article No..." />
-              <input type="text" placeholder="Search Product..." />
+              <input type="text" placeholder={t("Search Article No...")} />
+              <input type="text" placeholder={t("Search Product...")} />
             </div>
             <div className="buttons">
               <button className="green" onClick={() => { setEditingProduct(null); toggleForm(); }}>
-                New Product
+                {t("New Product")}
               </button>
-              <button className="blue">Print List</button>
-              <button className="gray">Advanced Mode</button>
+              <button className="blue">{t("Print List")}</button>
+              <button className="gray">{t("Advanced Mode")}</button>
             </div>
           </div>
 
@@ -99,14 +101,14 @@ const Dashboard = () =>{
             <table>
               <thead>
                 <tr>
-                  <th>Article No.</th>
-                  <th>Product/Service</th>
-                  <th>In Price</th>
-                  <th>Price</th>
-                  <th>Unit</th>
-                  <th>In Stock</th>
-                  <th>Description</th>
-                  <th>Actions</th>
+                  <th>{t("Article No.")}</th>
+                  <th>{t("Product/Service")}</th>
+                  <th>{t("In Price")}</th>
+                  <th>{t("Price")}</th>
+                  <th>{t("Unit")}</th>
+                  <th>{t("In Stock")}</th>
+                  <th>{t("Description")}</th>
+                  <th>{t("Actions")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,7 +131,7 @@ const Dashboard = () =>{
                 ) : (
                   <tr>
                     <td colSpan="8" style={{ textAlign: "center", padding: "1rem" }}>
-                      No products found.
+                      {t("No products found.")}
                     </td>
                   </tr>
                 )}

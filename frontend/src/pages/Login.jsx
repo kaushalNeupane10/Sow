@@ -5,6 +5,7 @@ import '../styles/login.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { useTranslation } from "react-i18next";
 
 const BG = 'https://storage.123fakturera.se/public/wallpapers/sverige43.jpg'
 const LOGO = 'https://storage.123fakturera.se/public/icons/diamond.png'
@@ -28,20 +29,22 @@ export default function Login() {
     }
   }
 
+  const {t} = useTranslation();
+
   return (
     <div className="container" style={{ backgroundImage: `url(${BG})` }}>
       <Navbar />
       <div className="overlay" />
       <div className="content">
         <div className="card">
-          <h1 className="title">Log in</h1>
+          <h1 className="title">{t("Log in")}</h1>
 
           <form onSubmit={handleSubmit} className="form">
             <label>
-              Enter your email address
+              {t("Enter your email address")}
               <input
                 type="email"
-                placeholder="Email address"
+                placeholder={t("Email address")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -49,11 +52,11 @@ export default function Login() {
             </label>
 
             <label>
-              Enter your password
+              {t("Enter your password")}
               <div className="password-input">
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Password"
+                  placeholder={t("Password")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -70,13 +73,13 @@ export default function Login() {
             {error && <div className="error">{error}</div>}
 
             <button className="loginbtn" type="submit">
-              Log in
+              {t("Log in")}
             </button>
           </form>
 
           <div className="footer-link">
-            <Link to="/register">Register</Link>
-            <Link to="/forgot">Forgot password?</Link>
+            <Link to="/register">{t("Register")}</Link>
+            <Link to="/forgot">{t("Forgot password?")}</Link>
           </div>
         </div>
 

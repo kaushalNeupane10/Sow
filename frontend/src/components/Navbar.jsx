@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const logo = "https://storage.123fakturera.se/public/icons/diamond.png";
 const FLAG_EN = "https://storage.123fakturere.no/public/flags/GB.png";
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [language, setLanguage] = useState("English");
   const [flag, setFlag] = useState(FLAG_EN);
+  const { i18n } = useTranslation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleDropdown = (e) => {
@@ -18,10 +20,12 @@ const Navbar = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleLanguageChange = (lang, flagUrl) => {
+  const handleLanguageChange = (lang, flagUrl,code) => {
     setLanguage(lang);
     setFlag(flagUrl);
     setDropdownOpen(false);
+    i18n.changeLanguage(code); 
+    localStorage.setItem("lang", code);
   };
 
   useEffect(() => {
@@ -29,6 +33,8 @@ const Navbar = () => {
     window.addEventListener("click", closeDropdown);
     return () => window.removeEventListener("click", closeDropdown);
   }, []);
+  
+  const { t } = useTranslation();
 
   return (
     <header className="navbar">
@@ -44,11 +50,11 @@ const Navbar = () => {
         </Link>
 
         <nav className={`nav-links ${isOpen ? "open" : ""}`}>
-          <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link to="/order" onClick={() => setIsOpen(false)}>Order</Link>
-          <Link to="/customers" onClick={() => setIsOpen(false)}>Our Customers</Link>
-          <Link to="/about" onClick={() => setIsOpen(false)}>About Us</Link>
-          <Link to="/contact" onClick={() => setIsOpen(false)}>Contact Us</Link>
+          <Link to="/" onClick={() => setIsOpen(false)}>{t("Home")}</Link>
+          <Link to="/order" onClick={() => setIsOpen(false)}>{t("Order")}</Link>
+          <Link to="/customers" onClick={() => setIsOpen(false)}>{t("Our Customers")}</Link>
+          <Link to="/about" onClick={() => setIsOpen(false)}>{t("About Us")}</Link>
+          <Link to="/contact" onClick={() => setIsOpen(false)}>{t("Contact Us")}</Link>
 
           {/* dropdown inside nav in desktop */}
           <div className="dropdown desktop-only" onClick={toggleDropdown}>
@@ -58,10 +64,10 @@ const Navbar = () => {
             </button>
             {dropdownOpen && (
               <div className="dropdown-content">
-                <button onClick={() => handleLanguageChange(FLAG_EN, "English")}>
+                <button onClick={() => handleLanguageChange("English",FLAG_EN, "en")}>
                   English<img src={FLAG_EN} alt="English" className="flag-img" /> 
                 </button>
-                <button onClick={() => handleLanguageChange(FLAG_SE,"Svenska")}>
+                <button onClick={() => handleLanguageChange("Svenska",FLAG_SE,"sv")}>
                   Svenska<img src={FLAG_SE} alt="Swedish" className="flag-img" /> 
                 </button>
               </div>
@@ -77,10 +83,10 @@ const Navbar = () => {
           </button>
           {dropdownOpen && (
             <div className="dropdown-content">
-              <button onClick={() => handleLanguageChange("English", FLAG_EN)}>
+              <button onClick={() => handleLanguageChange("English", FLAG_EN,"en")}>
                  English<img src={FLAG_EN} alt="English" className="flag-img" />
               </button>
-              <button onClick={() => handleLanguageChange("Svenska", FLAG_SE)}>
+              <button onClick={() => handleLanguageChange("Svenska", FLAG_SE,"sv")}>
                 Svenska<img src={FLAG_SE} alt="Swedish" className="flag-img" /> 
               </button>
             </div>

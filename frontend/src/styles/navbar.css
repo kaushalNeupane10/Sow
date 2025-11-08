@@ -116,11 +116,12 @@
 }
 
 .desktop-only {
-  display: flex;
+  display: flex !important;
 }
 .mobile-only {
-  display: none;
+  display: none !important;
 }
+
 
 @media (max-width: 900px) {
   .navbar-container {
@@ -138,12 +139,12 @@
   }
 
   .mobile-only {
-    display: flex;
+    display: flex !important;
     order: 3;
   }
 
   .desktop-only {
-    display: none;
+    display: none !important;
   }
 
   .nav-links {
