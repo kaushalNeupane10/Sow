@@ -2,25 +2,20 @@ from rest_framework import viewsets, generics, permissions, status, serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
-from .models import LocalText, PriceItem
-from .serializers import  (LocalTextSerializers, PriceItemSerializers, UserSerializers, )
+from .models import Product
+from .serializers import  (ProductSerializer, UserSerializers, )
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-
-class LocalTextViewSet(viewsets.ModelViewSet):
-    queryset = LocalText.objects.all()
-    serializer_class = LocalTextSerializers
-    permission_classes = [permissions.IsAuthenticated]
-
-class PriceItemViewSet(viewsets.ModelViewSet):
-    queryset = PriceItem.objects.all()
-    serializer_class = PriceItemSerializers
-    permission_classes = [permissions.IsAuthenticated]
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset= Product.objects.order_by('-created_at')
+    serializer_class = ProductSerializer
+    permission_classes= [IsAuthenticatedOrReadOnly]
 
 #register
 class RegisterView(APIView):

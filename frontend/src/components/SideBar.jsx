@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FaFileInvoice,
   FaUsers,
@@ -15,7 +14,7 @@ import {
 } from "react-icons/fa";
 import "./../styles/sidebar.css";
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar= ({ isOpen }) => {
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <ul>

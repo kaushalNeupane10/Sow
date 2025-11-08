@@ -20,9 +20,24 @@ export function clearTokens() {
 
 }
 
-export function isAuthenticated(){
-  return !!getAccessToken()
+export function isAuthenticated() {
+  const token = getAccessToken();
+  if(!token) return false;
+
+  try{
+    const payload= JSON.parse(atob(token.split('.')[1])); 
+    const expiry = payload.exp * 1000; 
+    if (Date.now() >= expiry) {
+      clearTokens(); 
+      return false;
+    }
+    return true;
+  } catch (err) {
+    clearTokens(); 
+    return false;
+  }
 }
+
 
 export async function login(email, password) {
   const res= await client.post('token/', {email, password })
