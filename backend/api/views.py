@@ -11,7 +11,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+import logging
 
+logger = logging.getLogger(__name__)
 class ProductViewSet(viewsets.ModelViewSet):
     queryset= Product.objects.order_by('-created_at')
     serializer_class = ProductSerializer
@@ -22,11 +24,16 @@ class RegisterView(APIView):
     """ Allow new user to register"""
     def post (self,request):
         serializer = UserSerializers(data=request.data)
-        if serializer.is_valid():
+        try:
+            serializer.is_valid(raise_exception=True)
             serializer.save()
-            return Response({"msg": "user registered successfully"},
-                            status=status.HTTP_201_CREATED,)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg": "user registered successfully"}, status=201)
+        except Exception as e:
+            logger.error(f"Register failed: {e}")
+            return Response(
+                {"error": serializer.errors if hasattr(serializer, "errors") else str(e)},
+                status=400
+            )
     
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
