@@ -2,6 +2,7 @@ import{ useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import "./../styles/dashboardNavbar.css";
 import { useTranslation } from "react-i18next";
+import { getProfile } from "../../auth/auth.js";
 
 const FLAG_EN = "https://storage.123fakturere.no/public/flags/GB.png";
 const FLAG_SE = "https://storage.123fakturere.no/public/flags/SE.png";
@@ -10,6 +11,7 @@ const DashboardNavbar = ({ toggleSidebar }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const[language, setLanguage] = useState("English");
   const [flag, setFlag] = useState(FLAG_EN);
+  const [username, setUserName] = useState("");
 
   const { i18n } = useTranslation();
 
@@ -44,6 +46,19 @@ const DashboardNavbar = ({ toggleSidebar }) => {
     window.addEventListener("click", closeDropdown);
     return ()=> window.removeEventListener("click", closeDropdown);
   }, [i18n] );
+  
+  useEffect(() => {
+  const fetchProfile = async () =>{
+    try {
+      const data = await getProfile();
+      setUserName(data.username);
+    } catch (err){
+      console.error("Failed to fetch profile:", err);
+    }
+  };
+
+  fetchProfile();
+}, []);
 
   return (
     <div className="dashboard-navbar">
@@ -55,7 +70,7 @@ const DashboardNavbar = ({ toggleSidebar }) => {
       <div className="profile">
         <div className="avatar"></div>
         <div>
-          <h4>krishna</h4>
+          <h4>{username || "User"}</h4>
         </div>
       </div>
 
