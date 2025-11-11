@@ -225,7 +225,7 @@ th {
 }
 
 /* landscape */
-@media (max-width: 992px) and (min-width: 769px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .search-bar {
     width: 100%;
   }

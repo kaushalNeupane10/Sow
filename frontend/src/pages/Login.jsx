@@ -82,9 +82,8 @@ export default function Login() {
             <Link to="/forgot">{t("Forgot password?")}</Link>
           </div>
         </div>
-
-        <Footer />
       </div>
+      <Footer />
     </div>
   )
 }

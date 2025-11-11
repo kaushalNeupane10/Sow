@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  margin-top: 30px;
+  margin-bottom: 30px;
   color: #fff;
   font-family: Arial, sans-serif;
 }
@@ -16,7 +16,7 @@
 
 .footer-left {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .footer-right a {
@@ -30,7 +30,7 @@
 .footer-line {
   border: 0;
   height: 1px;
-  background-color: #FFFFFF70;
+  background-color: white;
   margin: 15px 60px;
 }
 
@@ -39,11 +39,10 @@
   font-size: 0.9rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .footer-top {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
     margin: 0px;
   }
 
@@ -60,6 +59,6 @@
     font-size: 14px;
   }
   .footer-line{
-    margin: 10px 20px;
+    margin: 20px 20px;
   }
 }
