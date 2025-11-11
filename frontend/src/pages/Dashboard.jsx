@@ -6,7 +6,7 @@ import ProductForm from "../components/ProductForm";
 import "../styles/dashboard.css";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-
+import { FaSearch, FaPlus, FaPrint, FaSlidersH  } from "react-icons/fa";
 const Dashboard = () =>{
   const [isSidebarOpen, setIsSidebarOpen]= useState(false);
   const [products, setProducts] = useState([]);
@@ -85,18 +85,30 @@ const Dashboard = () =>{
         <main className="dashboard-main">
           <div className="search-actions">
             <div className="search-bar">
-              <input type="text" placeholder={t("Search Article No...")} />
-              <input type="text" placeholder={t("Search Product...")} />
+              <div className="search-input">
+                <span className="search-icon"><FaSearch/></span>
+                <input type="text" placeholder={t("Search Article No...")} />
+              </div>
+              <div className="search-input">
+                <span className="search-icon"><FaSearch/></span>
+                <input type="text" placeholder={t("Search Product...")} />
+              </div>
             </div>
             <div className="buttons">
-              <button className="green" onClick={() => { setEditingProduct(null); toggleForm(); }}>
-                {t("New Product")}
+              <button className="action-btn green" onClick={() => { setEditingProduct(null); toggleForm(); }}>
+                <span className="btn-text">{t("New Product")}</span>
+                <FaPlus className="btn-icon" style={{color: 'green'}} />
               </button>
-              <button className="blue">{t("Print List")}</button>
-              <button className="gray">{t("Advanced Mode")}</button>
+              <button className="action-btn blue">
+                <span className="btn-text">{t("Print List")}</span>
+                <FaPrint className="btn-icon" style={{color: 'blue'}}/>
+              </button>
+              <button className="action-btn gray">
+                <span className="btn-text">{t("Advanced Mode")}</span>
+                <FaSlidersH className="btn-icon" style={{color: 'blue'}}/>
+              </button>
             </div>
           </div>
-
           <div className="table-container">
             <table>
               <thead>

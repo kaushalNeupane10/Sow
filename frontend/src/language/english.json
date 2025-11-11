@@ -16,7 +16,8 @@
   "Login failed. Check credentials.": "Login failed. Check credentials.",
   "Register": "Register",
   "Forgot password?": "Forgot password?",
-
+   
+  "Menu": "Menu",
   "Invoices": "Invoices",
   "Customers": "Customers",
   "My Business": "My Business",

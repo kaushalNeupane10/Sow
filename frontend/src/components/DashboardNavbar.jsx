@@ -1,4 +1,4 @@
-import{ useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import "./../styles/dashboardNavbar.css";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ const FLAG_SE = "https://storage.123fakturere.no/public/flags/SE.png";
 
 const DashboardNavbar = ({ toggleSidebar }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const[language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState("English");
   const [flag, setFlag] = useState(FLAG_EN);
   const [username, setUserName] = useState("");
 
@@ -20,11 +20,11 @@ const DashboardNavbar = ({ toggleSidebar }) => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const handleLanguageChange =(lang, flagUrl, code) => {
+  const handleLanguageChange = (lang, flagUrl, code) => {
     setLanguage(lang);
     setFlag(flagUrl);
     setDropdownOpen(false);
-     i18n.changeLanguage(code);      
+    i18n.changeLanguage(code);
     localStorage.setItem("lang", code);
   };
 
@@ -41,24 +41,24 @@ const DashboardNavbar = ({ toggleSidebar }) => {
       }
     }
 
-  // close when clicking outside dropmenu
-    const closeDropdown =() => setDropdownOpen(false);
+    // close when clicking outside dropmenu
+    const closeDropdown = () => setDropdownOpen(false);
     window.addEventListener("click", closeDropdown);
-    return ()=> window.removeEventListener("click", closeDropdown);
-  }, [i18n] );
-  
-  useEffect(() => {
-  const fetchProfile = async () =>{
-    try {
-      const data = await getProfile();
-      setUserName(data.username);
-    } catch (err){
-      console.error("Failed to fetch profile:", err);
-    }
-  };
+    return () => window.removeEventListener("click", closeDropdown);
+  }, [i18n]);
 
-  fetchProfile();
-}, []);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await getProfile();
+        setUserName(data.username);
+      } catch (err) {
+        console.error("Failed to fetch profile:", err);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   return (
     <div className="dashboard-navbar">
@@ -68,9 +68,13 @@ const DashboardNavbar = ({ toggleSidebar }) => {
       </button>
 
       <div className="profile">
-        <div className="avatar"></div>
+        <div className="avatar">
+          <img src="https://i.pravatar.cc/150?img=32" alt="user avatar" />
+          <span className="dot"></span>
+        </div>
         <div>
           <h4>{username || "User"}</h4>
+          <h4>Storfjord AS</h4>
         </div>
       </div>
 
@@ -83,10 +87,14 @@ const DashboardNavbar = ({ toggleSidebar }) => {
 
           {dropdownOpen && (
             <div className="dropdown-content">
-              <button onClick={()=> handleLanguageChange("English", FLAG_EN, "en")}>
+              <button
+                onClick={() => handleLanguageChange("English", FLAG_EN, "en")}
+              >
                 English <img src={FLAG_EN} alt="English" className="flag-img" />
               </button>
-              <button onClick={() => handleLanguageChange("Svenska", FLAG_SE, "sv")}>
+              <button
+                onClick={() => handleLanguageChange("Svenska", FLAG_SE, "sv")}
+              >
                 Svenska <img src={FLAG_SE} alt="Swedish" className="flag-img" />
               </button>
             </div>
