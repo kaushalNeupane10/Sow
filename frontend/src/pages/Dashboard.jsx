@@ -1,12 +1,12 @@
 import{ useState, useEffect } from "react";
-import { FaChevronRight, FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash, FaEdit } from "react-icons/fa";
 import Sidebar from "../components/SideBar";
 import DashboardNavbar from "../components/DashboardNavbar";
 import ProductForm from "../components/ProductForm";
 import "../styles/dashboard.css";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-import { FaSearch, FaPlus, FaPrint, FaSlidersH  } from "react-icons/fa";
+import { FaSearch, FaPlus, FaPrint, FaSlidersH} from "react-icons/fa";
 const Dashboard = () =>{
   const [isSidebarOpen, setIsSidebarOpen]= useState(false);
   const [products, setProducts] = useState([]);
@@ -127,7 +127,7 @@ const Dashboard = () =>{
                 {products.length > 0 ? (
                   products.map((p) => (
                     <tr key={p.id} className="table-row">
-                      <td>{p.article_no} <FaChevronRight className="arrow-icon" /></td>
+                      <td>{p.article_no}</td>
                       <td>{p.name}</td>
                       <td>{p.in_price}</td>
                       <td>{p.price}</td>

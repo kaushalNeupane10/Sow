@@ -7,7 +7,7 @@ import { getAccessToken, getRefreshToken, setTokens, clearTokens, isAuthenticate
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAutoRefresh from '../auth/useAutoRefresh.js'
-
+import Terms from './pages/Terms.jsx'
 
 export default function App(){
   const [loading, setLoading] = useState(true);
@@ -49,6 +49,7 @@ export default function App(){
     <Routes>
       <Route path="/" element={loading ? (<div>loading...</div>) :authChecked && isAuthenticated() ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
+      <Route path='/terms' element={<Terms />} />
       <Route path="/dashboard" element={
         <ProtectedRoute>
           <Dashboard />
